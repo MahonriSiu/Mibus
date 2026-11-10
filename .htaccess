@@ -1,0 +1,17 @@
+Options -Indexes
+DirectoryIndex index.php
+
+<FilesMatch "(^\.|\.(sql|log|md|ini|bak|zip|sh|key|lock)$)">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "^(manifest\.webmanifest|sw\.js)$">
+    Require all granted
+</FilesMatch>
+
+RewriteEngine On
+
+RewriteRule ^(app|config|database|storage|scripts|docs)(/|$) - [F,L]
+
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]
